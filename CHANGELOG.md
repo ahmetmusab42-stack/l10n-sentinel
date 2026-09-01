@@ -2,7 +2,13 @@
 
 All notable changes to this project are documented here.
 
-## 0.3.0 — Unreleased
+## 0.3.1 — 2026-09-01
+
+- Added credential-free PyPI publishing through GitHub OIDC.
+- Isolated the PyPI identity token to a dedicated two-step publishing job.
+- Updated GitHub Actions to their Node.js 24-compatible major releases.
+
+## 0.3.0 — 2026-09-01
 
 - Renamed the public distribution and CLI to L10n Sentinel.
 - Added source-to-target JSON and ARB locale contract checks.

@@ -22,9 +22,12 @@ It never rewrites application locale catalogs during a check.
 Python 3.10 or newer is required.
 
 ```bash
-python -m pip install -e .[dev]
+python -m pip install l10n-sentinel
 l10n-sentinel --version
 ```
+
+Contributors working from a clone can install the development dependencies with
+`python -m pip install -e .[dev]`.
 
 Check a target JSON or ARB catalog against its source:
 
@@ -100,7 +103,7 @@ changes like code: deleting a fingerprint re-enables that finding. Its schema is
 Pin the action to a tagged release:
 
 ```yaml
-- uses: ahmetmusab42-stack/l10n-sentinel@v0.3.0
+- uses: ahmetmusab42-stack/l10n-sentinel@v0.3.1
   with:
     source: locales/en.json
     target: locales/tr.json
@@ -147,7 +150,7 @@ private translation data.
 
 ## Project status
 
-Version 0.3.0 is a release candidate. The CLI contract and data-safety behavior are tested, but the
+Version 0.3.1 is an alpha release. The CLI contract and data-safety behavior are tested, but the
 project is not yet claiming broad format coverage or production adoption. Format support expands
 only with redistributable real-world fixtures and regression tests.
 
