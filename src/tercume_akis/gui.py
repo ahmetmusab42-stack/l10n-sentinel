@@ -761,4 +761,6 @@ class WorkbenchApp:
 
 
 def launch_gui() -> None:
-    WorkbenchApp().run()
+    from .scanner_gui import launch_scanner_gui
+
+    launch_scanner_gui()
