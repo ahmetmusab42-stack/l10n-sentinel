@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "exported_at": "2026-09-01T00:00:00Z",
+  "project": {
+    "slug": "sample-project",
+    "name": "Sample Website Localization",
+    "source_language": "en",
+    "target_language": "tr",
+    "description": "Synthetic sample project for local testing and documentation.",
+    "created_at": "2026-09-01T00:00:00Z",
+    "updated_at": "2026-09-01T00:00:00Z"
+  },
+  "entries": [
+    {
+      "id": "00000000-0000-0000-0000-000000000001",
+      "project_slug": "sample-project",
+      "source_key": "nav.home",
+      "source_text": "Home",
+      "target_text": "Ana Sayfa",
+      "translation_status": "done",
+      "review_status": "approved",
+      "context": "Main navigation label.",
+      "notes": "Synthetic sample data.",
+      "created_at": "2026-09-01T00:00:00Z",
+      "updated_at": "2026-09-01T00:00:00Z"
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000002",
+      "project_slug": "sample-project",
+      "source_key": "settings.language",
+      "source_text": "Language",
+      "target_text": "Dil",
+      "translation_status": "translated",
+      "review_status": "in-review",
+      "context": "Settings page label.",
+      "notes": "Synthetic sample data.",
+      "created_at": "2026-09-01T00:00:00Z",
+      "updated_at": "2026-09-01T00:00:00Z"
+    }
+  ],
+  "glossary": [
+    {
+      "id": "00000000-0000-0000-0000-000000000010",
+      "project_slug": "sample-project",
+      "source_term": "Terms of Service",
+      "target_term": "Hizmet Koşulları",
+      "definition": "Legal page header used in product settings.",
+      "notes": "Synthetic sample data.",
+      "status": "active",
+      "created_at": "2026-09-01T00:00:00Z",
+      "updated_at": "2026-09-01T00:00:00Z"
+    }
+  ]
+}

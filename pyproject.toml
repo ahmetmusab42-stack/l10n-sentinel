@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "l10n-sentinel"
+version = "0.3.0"
+description = "Offline locale contract checks and localization risk reports for CI."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MPL-2.0"
+authors = [{ name = "Ahmet Ercan" }]
+keywords = ["localization", "translation", "i18n", "l10n", "qa", "sarif", "security"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Intended Audience :: End Users/Desktop",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/ahmetmusab42-stack/l10n-sentinel"
+Documentation = "https://github.com/ahmetmusab42-stack/l10n-sentinel#readme"
+Issues = "https://github.com/ahmetmusab42-stack/l10n-sentinel/issues"
+Source = "https://github.com/ahmetmusab42-stack/l10n-sentinel"
+
+[project.scripts]
+l10n-sentinel = "tercume_akis.app:main"
+
+[project.optional-dependencies]
+dev = ["build>=1.2.2", "coverage>=7.6", "ruff>=0.6.9", "twine>=6.1"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.coverage.run]
+source = ["tercume_akis"]
+omit = ["*/gui.py"]
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true

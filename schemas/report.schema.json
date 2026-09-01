@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "L10n Sentinel JSON report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "tool", "title", "summary", "findings"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "tool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "version": {"type": "string", "minLength": 1}
+      }
+    },
+    "title": {"type": "string"},
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "error": {"type": "integer", "minimum": 0},
+        "warning": {"type": "integer", "minimum": 0},
+        "info": {"type": "integer", "minimum": 0}
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["key", "severity", "explanation"],
+        "properties": {
+          "key": {"type": "string"},
+          "issue_type": {"type": "string"},
+          "change_type": {"type": "string"},
+          "severity": {"enum": ["error", "warning", "info"]},
+          "explanation": {"type": "string"},
+          "path": {"type": "string"},
+          "line": {"type": "integer", "minimum": 1}
+        },
+        "anyOf": [
+          {"required": ["issue_type"]},
+          {"required": ["change_type"]}
+        ]
+      }
+    }
+  }
+}

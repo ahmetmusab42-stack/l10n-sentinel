@@ -1,0 +1,9 @@
+{
+  "nav": {
+    "home": "Ana Sayfa",
+    "account": "Hesap"
+  },
+  "files": {
+    "count": "{count} dosya seçildi"
+  }
+}

@@ -1,0 +1,84 @@
+name: L10n Sentinel
+description: Check locale contracts or validate a localization document without cloud services.
+inputs:
+  input:
+    description: Path to a native project bundle, PO, or XLIFF document.
+    required: false
+    default: ""
+  source:
+    description: Path to a source JSON or ARB locale catalog.
+    required: false
+    default: ""
+  target:
+    description: Path to a target JSON or ARB locale catalog.
+    required: false
+    default: ""
+  format:
+    description: Optional format override (json, po, or xliff).
+    required: false
+    default: ""
+  fail-on:
+    description: Lowest failing severity (never, warning, or error).
+    required: false
+    default: error
+  baseline:
+    description: Optional finding baseline file for gradual adoption.
+    required: false
+    default: ""
+outputs:
+  report:
+    description: Path to the generated machine-readable report.
+    value: ${{ steps.integrity.outputs.report }}
+runs:
+  using: composite
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+    - name: Install L10n Sentinel
+      shell: bash
+      run: python -m pip install "${{ github.action_path }}"
+    - id: integrity
+      name: Check localization integrity
+      shell: bash
+      env:
+        TERCUME_AKIS_INPUT: ${{ inputs.input }}
+        TERCUME_AKIS_SOURCE: ${{ inputs.source }}
+        TERCUME_AKIS_TARGET: ${{ inputs.target }}
+        TERCUME_AKIS_FORMAT: ${{ inputs.format }}
+        TERCUME_AKIS_FAIL_ON: ${{ inputs.fail-on }}
+        TERCUME_AKIS_BASELINE: ${{ inputs.baseline }}
+      run: |
+        report="$RUNNER_TEMP/l10n-sentinel-report.json"
+        if [[ -n "$TERCUME_AKIS_SOURCE" || -n "$TERCUME_AKIS_TARGET" ]]; then
+          if [[ -z "$TERCUME_AKIS_SOURCE" || -z "$TERCUME_AKIS_TARGET" ]]; then
+            echo "Both source and target inputs are required for a locale contract check." >&2
+            exit 2
+          fi
+          baseline_args=()
+          if [[ -n "$TERCUME_AKIS_BASELINE" ]]; then
+            baseline_args=(--baseline "$TERCUME_AKIS_BASELINE")
+          fi
+          l10n-sentinel check-locales \
+            --source "$TERCUME_AKIS_SOURCE" \
+            --target "$TERCUME_AKIS_TARGET" \
+            --fail-on "$TERCUME_AKIS_FAIL_ON" \
+            --output-format github \
+            --report-file "$report" \
+            "${baseline_args[@]}"
+        elif [[ -n "$TERCUME_AKIS_INPUT" ]]; then
+          format_args=()
+          if [[ -n "$TERCUME_AKIS_FORMAT" ]]; then
+            format_args=(--format "$TERCUME_AKIS_FORMAT")
+          fi
+          l10n-sentinel validate \
+            --input "$TERCUME_AKIS_INPUT" \
+            --fail-on "$TERCUME_AKIS_FAIL_ON" \
+            --output-format json \
+            "${format_args[@]}" | tee "$report"
+        else
+          echo "Provide input, or provide both source and target." >&2
+          exit 2
+        fi
+        echo "report=$report" >> "$GITHUB_OUTPUT"

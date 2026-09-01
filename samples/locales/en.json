@@ -1,0 +1,9 @@
+{
+  "nav": {
+    "home": "Home",
+    "account": "Account"
+  },
+  "files": {
+    "count": "{count} files selected"
+  }
+}
