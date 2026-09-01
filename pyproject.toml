@@ -52,7 +52,7 @@ select = ["E", "F", "I", "UP", "B"]
 
 [tool.coverage.run]
 source = ["tercume_akis"]
-omit = ["*/gui.py"]
+omit = ["*/gui.py", "*/scanner_gui.py"]
 
 [tool.coverage.report]
 fail_under = 80
